@@ -109,7 +109,6 @@ Each of these files are shift into corresponding **S3** directories
 </p>
 
 
-<br>
 ## 5. Data Pipeline:
 Data Pipeline is available in directory `data_pipeline`. It consists of the following steps:<br>
 
