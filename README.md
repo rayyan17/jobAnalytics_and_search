@@ -27,6 +27,21 @@ In this pipeline we are using the following data resources:<br>
 <br> <i>
 survey_results_public.csv</i> contains information about developers on StackOverflow. It has 129 columns with various useful info like his hobbies, skillset, education, employment etc.<br>
 
+## 4. Choice of Tools and Technologies:
+In order to explain the choice of tools and technologies for this project it is important to understand the data resources.
+
+1. Data Resources are not limited to LinkedIn, Indeed, Glassdoor or StackOverflow. As the project grows further we will be adding more data sources like monster.com or frm other job info platforms.
+2. Each of these resources have a complex schema with raw data that needs extensive processing and cleaning. 
+
+Both of the above 2 points can be much easily cater by the **PySpark**. With spark architecture we can deal with heavy loads of data, pre-processing and cleaning because of Lazy Evaluation. It also has an NLP based packages that can help in text processing. Also as soon as we need more computation we can just increase the slave nodes.
+
+**S3** will acts as our staging platform as well as a permanent storage for the data coming from multiple resources. S3 is a cheap storage and will be best to use in this data extensive pipeline.
+
+**Redshift** will be used to shift processed data  by PySpark to corresponding tables. This way Business Analytics team can easily use OLAP queries on those tables. 
+
+**Airflow** will play a very important role in keeping our data stores updated. Each day we get thousands of jobs update in platforms like LinkedIn, Glassdoor etc. Airflow will make sure that we maintain most recent data in our data stores.
+
+
 ## 3. Project Flow:
 The project is divided into multiple modules:<br>
 
