@@ -1,7 +1,6 @@
 # 1. PROJECT (Job Search and Analysis System):
 Job Search and Analysis Platform is a system which fetches data from various job posting platforms like LinkedIn, GlassDoor, Indeed etc. It extractes the useful information for example, job details, salaries offered, location of job, job types, company ratings and related departments. The system also gets information from Developer Community platforms like StackOverflow so that Buisness Analytics team can estimate which job is saturating and which needs more skilled workers. This system can also perform geo based analysis i.e. which country/city is offering most jobs and in which sector.
 
-<br>
 ## 2. Data Resources:
 In this pipeline we are using the following data resources:<br>
 
