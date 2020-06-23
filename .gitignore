@@ -9,7 +9,11 @@ __pycache__/
 *.parquets
 *.csv
 *.txt
+*.pyc
 
 poc/
+data_pipeline/airflow/
+
 
 !requirements.txt
+
