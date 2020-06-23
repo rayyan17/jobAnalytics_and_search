@@ -27,7 +27,7 @@ In this pipeline we are using the following data resources:<br>
 <br> <i>
 survey_results_public.csv</i> contains information about developers on StackOverflow. It has 129 columns with various useful info like his hobbies, skillset, education, employment etc.<br>
 
-## 4. Choice of Tools and Technologies:
+## 3. Choice of Tools and Technologies:
 In order to explain the choice of tools and technologies for this project it is important to understand the data resources.
 
 1. Data Resources are not limited to LinkedIn, Indeed, Glassdoor or StackOverflow. As the project grows further we will be adding more data sources like monster.com or frm other job info platforms.
@@ -42,7 +42,7 @@ Both of the above 2 points can be much easily cater by the **PySpark**. With spa
 **Airflow** will play a very important role in keeping our data stores updated. Each day we get thousands of jobs update in platforms like LinkedIn, Glassdoor etc. Airflow will make sure that we maintain most recent data in our data stores.
 
 
-## 3. Project Flow:
+## 4. Project Flow:
 The project is divided into multiple modules:<br>
 
 1. **ARCHITECTURE**:
@@ -110,7 +110,7 @@ Each of these files are shift into corresponding **S3** directories
 
 
 <br>
-## 4. Data Pipeline:
+## 5. Data Pipeline:
 Data Pipeline is available in directory `data_pipeline`. It consists of the following steps:<br>
 
 1. Process Data in Data Lake
@@ -122,7 +122,7 @@ Data Pipeline is available in directory `data_pipeline`. It consists of the foll
 <img src="readme_files/data_pipeline.png" width="100%" height="100%">
 </p>
 
-## 5. Running The Project:
+## 6. Running The Project:
 **Create Virtual Environment**
 ```commandline
 # create python virtual environment
@@ -175,7 +175,7 @@ $ script/airflow_start.sh
 
 After this go to <a>http://localhost:3001/</a> and run the DAG (jobs_analysis). Make sure to add all the credentials of Redshift and S3 in Admin panel before running the DAG.
 
-## 6. Directory Structure:
+## 7. Directory Structure:
 ```
 /jobAnalytics_and_search
 
