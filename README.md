@@ -174,3 +174,35 @@ $ script/airflow_start.sh
 
 
 After this go to <a>http://localhost:3001/</a> and run the DAG (jobs_analysis). Make sure to add all the credentials of Redshift and S3 in Admin panel before running the DAG.
+
+## 6. Directory Structure:
+```
+/jobAnalytics_and_search
+
+    - data_lake/
+        - data_util.py
+        - glassdoor_jobs.py
+        - indeed_jobs.py
+        - linkedin_jobs.py
+        - stackoverflow_dev.py
+        - process_data.py
+        - lake.cfg
+        
+    - data_pipeline/
+        - dags/
+            - jobs_dag.py
+        - plugins/
+            - operators/
+                - copy_redshift.py
+                - data_quality.py
+        - create_tables.sql
+
+    - setup.py
+
+"data_lake" folder includes code for fetching raw_data from S3, process it, and move it to S3
+
+"data_pipeline" folder includes code for airflow pipeline to run the whole project daily
+
+- setup.py builds command `process-data-from-lake` to run data lake task from bash
+
+```
