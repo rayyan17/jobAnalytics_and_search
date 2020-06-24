@@ -128,16 +128,28 @@ copy_developers_to_redshift = CopyToRedshiftOperator(
 )
 
 
-dq_checks = [
+dq_null_checks = [
 {'check_sql': "SELECT COUNT(*) FROM jobs;", 'test_expr': "{} < 1"},
 {'check_sql': "SELECT COUNT(*) FROM developers WHERE person_id is NULL;", 'test_expr': "{} >= 1"}
 ]
 
-run_quality_checks = DataQualityOperator(
-    task_id='Run_data_quality_checks',
+count_and_null_test = DataQualityOperator(
+    task_id='Count_and_Null_Test',
     dag=dag,
     redshift_conn_id="redshift",
-    dq_checks=dq_checks
+    dq_checks=dq_null_checks
+)
+
+
+dq_join_checks = [
+{'check_sql': "SELECT COUNT(*) FROM job_salary JOIN company_location on (job_salary.company = company_location.company);", 'test_expr': "{} < 1"},
+]
+
+table_relation_test = DataQualityOperator(
+    task_id='Table_Relation_Test',
+    dag=dag,
+    redshift_conn_id="redshift",
+    dq_checks=dq_join_checks
 )
 
 
@@ -156,12 +168,23 @@ create_tables >> copy_job_salary_to_redshift
 create_tables >> copy_developers_to_redshift
 
 
-copy_jobs_to_redshift >> run_quality_checks
-copy_time_details_to_redshift >> run_quality_checks
-copy_company_geo_to_redshift >> run_quality_checks
-copy_job_rating_to_redshift >> run_quality_checks
-copy_job_sector_to_redshift >> run_quality_checks
-copy_job_salary_to_redshift >> run_quality_checks
-copy_developers_to_redshift >> run_quality_checks
+copy_jobs_to_redshift >> count_and_null_test
+copy_time_details_to_redshift >> count_and_null_test
+copy_company_geo_to_redshift >> count_and_null_test
+copy_job_rating_to_redshift >> count_and_null_test
+copy_job_sector_to_redshift >> count_and_null_test
+copy_job_salary_to_redshift >> count_and_null_test
+copy_developers_to_redshift >> count_and_null_test
 
-run_quality_checks >> end_operator
+
+copy_jobs_to_redshift >> table_relation_test
+copy_time_details_to_redshift >> table_relation_test
+copy_company_geo_to_redshift >> table_relation_test
+copy_job_rating_to_redshift >> table_relation_test
+copy_job_sector_to_redshift >> table_relation_test
+copy_job_salary_to_redshift >> table_relation_test
+copy_developers_to_redshift >> table_relation_test
+
+
+count_and_null_test >> end_operator
+table_relation_test >> end_operator

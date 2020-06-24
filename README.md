@@ -145,6 +145,8 @@ Data Pipeline is available in directory `data_pipeline`. It consists of the foll
 2. Create Tables for Business analytics team
 3. Move New Data from S3 to the corresponding Tables
 4. Perform Data Quality tests
+    1. **Count_and_Null_Test**: This test make sure if there is data avaialble in the tables and make sure that there should be no Null value in primary key columns
+    2.  **Table_Relation_Test**: This test make sure that joins are working properly between fact and dimension tables
 
 <p align="center">
 <img src="readme_files/data_pipeline.png" width="100%" height="100%">
