@@ -109,13 +109,34 @@ Each of these files are shift into corresponding **S3** directories
 4. **Shift Data Into Redshift**:
 <p>All these files in S3 are then shited to the RedShift Tables.</p>
 
-5. **Data Model**:
+## 5. Data Model
+
+1. **Schema Type**:
+    <br>Data Model has 2 main sections: Jobs and developers.  Jobs section is following **Star Scehma** with jobs table as a fact table and (job_rating, company_location, time_details, job_salary, job_sector) as Dimension Tables. Developer section is a separate section in which Business Analytics team can use columns like country or development area to find the related jobs for the candidate.
+
+2.  **Schema Goal**:
+    <br> The schema is designed in a way to handle multiple job related queires like what is the most recent job, what is the salary range of a particular job_title in a company, location details for the posted job, or search jobs belongs to a particular sector
 <p align="center">
 <img src="readme_files/data_model.png" width="100%" height="60%">
 </p>
+3. **Sample Queries for BA team:**<br>
+    Check Salary variations by a Company at different locations:
+    ```sql
+    SELECT company_location.country, company_location.city, job_salary.estimated_salary FROM job_salary 
+    JOIN company_location on (job_salary.company = company_location.company);
+    ```
+    Show the most recent fetched jobs:
+    ```sql
+    SELECT jobs.job_title, jobs.company, jobs.location, 
+    time_details.source_year, time_details.source_month, time_details.source_day 
+    FROM jobs 
+    JOIN time_details 
+    on (jobs.source_fetch_date = time_details.source_fetch_date)
+    order by source_year desc, source_month desc, source_day desc;
+    ```
 
 
-## 5. Data Pipeline:
+## 6. Data Pipeline:
 Data Pipeline is available in directory `data_pipeline`. It consists of the following steps:<br>
 
 1. Process Data in Data Lake
@@ -127,7 +148,7 @@ Data Pipeline is available in directory `data_pipeline`. It consists of the foll
 <img src="readme_files/data_pipeline.png" width="100%" height="100%">
 </p>
 
-## 6. Running The Project:
+## 7. Running The Project:
 **Create Virtual Environment**
 ```commandline
 # create python virtual environment
@@ -180,7 +201,7 @@ $ script/airflow_start.sh
 
 After this go to <a>http://localhost:3001/</a> and run the DAG (jobs_analysis). Make sure to add all the credentials of Redshift and S3 in Admin panel before running the DAG.
 
-## 7. Directory Structure:
+## 8. Directory Structure:
 ```
 /jobAnalytics_and_search
 
@@ -212,7 +233,7 @@ After this go to <a>http://localhost:3001/</a> and run the DAG (jobs_analysis). 
 
 ```
 
-## 8. Additional Questions:
+## 9. Additional Questions:
 
 1. **The data was increased by 100x**:
 <br>For data fetching and processing we are using Pyspark. So even if the data is increased that much it will still successfully process it with the cost of some time delay because of Spark Lazy Evaluation property. The time delay can also be handle by increasing more number of slave server nodes.
