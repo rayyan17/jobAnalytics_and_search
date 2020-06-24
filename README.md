@@ -72,26 +72,32 @@ Each of these 4 transformer extracts useful information from **S3** bucket and g
 <p align="center">
 <img src="readme_files/job_table_file.png" width="100%" height="100%">
 </p>
+
 * Time_Details:<br>
 <p align="center">
 <img src="readme_files/fetch_details_table.png" width="70%" height="60%">
 </p>
+
 * Company_Location:<br>
 <p align="center">
 <img src="readme_files/job_location_table.png" width="70%" height="60%">
 </p>
+
 * Job_Rating:<br>
 <p align="center">
 <img src="readme_files/job_rating_table.png" width="60%" height="60%">
 </p>
+
 * Job_Salary<br>
 <p align="center">
 <img src="readme_files/job_salary_table.png" width="70%" height="60%">
 </p>
+
 * Job_Sector<br>
 <p align="center">
 <img src="readme_files/job_sector_table.png" width="50%" height="60%">
 </p>
+
 * Developers<br>
 <p align="center">
 <img src="readme_files/developer_tables.png" width="100%" height="60%">
@@ -205,3 +211,12 @@ After this go to <a>http://localhost:3001/</a> and run the DAG (jobs_analysis). 
 - setup.py builds command `process-data-from-lake` to run data lake task from bash
 
 ```
+
+## 8. Additional Questions:
+
+1. **The data was increased by 100x**:
+<br>For data fetching and processing we are using Pyspark. So even if the data is increased that much it will still successfully process it with the cost of some time delay because of Spark Lazy Evaluation property. The time delay can also be handle by increasing more number of slave server nodes.
+2. **The pipelines would be run on a daily basis by 7 am every day.**:
+<br>The pipeline is set to 2 days ago date. In order to start it by 7am just switch on the DAG by 7am clock and it will keep its daily iteration by 7am daily.
+3. **The database needed to be accessed by 100+ people.**:
+<br>AWS Redshift can easily Grant access to a group of people with same rights or indvidually.
