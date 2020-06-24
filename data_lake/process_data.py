@@ -1,3 +1,5 @@
+"""Project Entry Point"""
+
 import configparser
 import os
 
@@ -10,6 +12,7 @@ from pyspark.sql import SparkSession
 
 
 def create_spark_session():
+	"""Creates Spark Session in Local Mode"""
 	spark = SparkSession \
 		.builder \
 		.config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:2.7.0") \
@@ -19,6 +22,14 @@ def create_spark_session():
 
 
 def etl(spark, s_paths, w_paths):
+	"""Process data coming from Multiple Sources
+
+	Args:
+		spark (Spark): spark session instance
+		s_paths (dict): A dictionary with source name and its path
+		w_paths (dict): A dictionary with destination name and its path
+
+	"""
 
 	l = LinkedInJobs(spark, source_path=s_paths["LINKEDIN_PATH"])
 	l.read_data_from_source()
@@ -48,13 +59,10 @@ def etl(spark, s_paths, w_paths):
 
 
 def main():
-	# print("CHECK: ", os.path.realpath(__file__))
-	# print("CHECK_2: ", os.path.dirname(os.path.realpath(__file__)))
-	# print("CHECK_3: ", os.path.join(os.path.dirname(os.path.realpath(__file__)), "lake.cfg"))
+	"""Main Entry Function"""
 	config_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "lake.cfg")
 	config = configparser.ConfigParser()
 	config.read(config_path)
-	# config.read('config/lake.cfg')
 
 	os.environ['AWS_ACCESS_KEY_ID']=config["AWS"]['AWS_ACCESS_KEY_ID']
 	os.environ['AWS_SECRET_ACCESS_KEY']=config["AWS"]['AWS_SECRET_ACCESS_KEY']

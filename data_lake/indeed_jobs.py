@@ -1,3 +1,5 @@
+"""Indeed Data Transformer Module"""
+
 import os
 
 from pyspark.sql.functions import col
@@ -9,7 +11,7 @@ from data_lake.data_util import DataUtil
 
 
 class IndeedJobs(DataUtil):
-
+	"""Indeed Data Transformer"""
 	def __init__(self, spark_session, source_path):
 		super().__init__(spark_session)
 
@@ -17,6 +19,7 @@ class IndeedJobs(DataUtil):
 		self.source_path = source_path
 
 	def generate_jobs_table(self, write_path):
+		"""Generate data for jobs table"""
 		job_cols = ["Jobs as job_title", "Summary as job_description", 
 					"Companies as company", "Locations as location", 
 					"date_data_created as source_fetch_date"]
@@ -30,6 +33,7 @@ class IndeedJobs(DataUtil):
 
 
 	def generate_date_description_table(self, write_path):
+		"""Generate data for time_details table"""
 		date_cols = ["date_data_created as source_fetch_date"]
 
 		df_jobs_source = self.main_df.selectExpr(*date_cols)
@@ -43,6 +47,7 @@ class IndeedJobs(DataUtil):
 		df_jobs_source.toPandas().to_csv(w_path, index=False)
 
 	def generate_location_description(self, write_path):
+		"""Generate data for company_location table"""
 		location_cols = ["Companies as company", "Locations as location"]
 
 		df_job_location = self.main_df.selectExpr(*location_cols)
@@ -55,6 +60,7 @@ class IndeedJobs(DataUtil):
 		df_job_location.toPandas().to_csv(w_path, index=False)
 
 	def generate_job_reviews(self, write_path):
+		"""Generate data for job_rating table"""
 		review_cols = ["Jobs as job_title", "Companies as company", "Rating as rating"]
 		
 		df_job_reviews = self.main_df.selectExpr(*review_cols)
@@ -64,29 +70,3 @@ class IndeedJobs(DataUtil):
 
 		w_path = os.path.join(write_path, f"df_job_reviews_{self.source}.csv")
 		df_job_reviews.toPandas().to_csv(w_path, index=False)
-
-
-# from pyspark.sql import SparkSession
-# def create_spark_session():
-#     spark = SparkSession \
-#         .builder \
-#         .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:2.7.0") \
-#         .getOrCreate()
-#     return spark
-
-
-
-# from pyspark.sql import SparkSession
-
-
-# if __name__ == "__main__":
-# 	spark = create_spark_session()
-
-# 	l = IndeedJobs(spark, source_path="../final_data/Data_Science_Jobs_Indeed/*.csv")
-# 	l.read_data_from_source()
-# 	l.generate_jobs_table("/home/rayyan/Projects/Udacity_Capstone_Project_Data_Science_Jobs/final_data/output/job_data")
-# 	l.generate_location_description("/home/rayyan/Projects/Udacity_Capstone_Project_Data_Science_Jobs/final_data/output/job_location")
-# 	l.generate_date_description_table("/home/rayyan/Projects/Udacity_Capstone_Project_Data_Science_Jobs/final_data/output/job_date_details")
-# 	l.generate_job_reviews("/home/rayyan/Projects/Udacity_Capstone_Project_Data_Science_Jobs/final_data/output/job_rating")
-
-# 	spark.stop()

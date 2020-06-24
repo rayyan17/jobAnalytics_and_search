@@ -1,3 +1,5 @@
+"""Glassdoor Data Transformer Module"""
+
 import os
 
 from pyspark.sql.functions import col
@@ -10,6 +12,7 @@ from data_lake.data_util import DataUtil
 
 
 class GlassdoorJobs(DataUtil):
+	"""Glassdoor Data Transformer"""
 
 	def __init__(self, spark_session, source_path):
 		super().__init__(spark_session)
@@ -19,6 +22,7 @@ class GlassdoorJobs(DataUtil):
 		
 
 	def generate_jobs_table(self, write_path):
+		"""Generate data for jobs table"""
 		df_jobs = self.main_df.select(col("Job Title").alias("job_title"), 
 									col("Job Description").alias("job_description"), 
 									col("Company Name").alias("company"), 
@@ -33,6 +37,7 @@ class GlassdoorJobs(DataUtil):
 
 
 	def generate_date_description_table(self, write_path):
+		"""Generate data for time_details table"""
 		date_cols = ["date_data_created as source_fetch_date"]
 		df_jobs_source = self.main_df.selectExpr(*date_cols)
 		df_jobs_source = df_jobs_source.withColumn("source", lit(self.source))
@@ -45,6 +50,7 @@ class GlassdoorJobs(DataUtil):
 		df_jobs_source.toPandas().to_csv(w_path, index=False)
 
 	def generate_location_description(self, write_path):
+		"""Generate data for company_location table"""
 		df_job_location = self.main_df.select(col("Company Name").alias("company"),
 											 col("Location").alias("location"))
 
@@ -57,6 +63,7 @@ class GlassdoorJobs(DataUtil):
 		df_job_location.toPandas().to_csv(w_path, index=False)
 
 	def generate_job_reviews(self, write_path):
+		"""Generate data for job_rating table"""
 		df_job_reviews = self.main_df.select(col("Job Title").alias("job_title"),
 											 col("Company Name").alias("company"), 
 											 col("Rating").alias("rating"))
@@ -69,6 +76,7 @@ class GlassdoorJobs(DataUtil):
 		df_job_reviews.toPandas().to_csv(w_path, index=False)
 
 	def generate_job_salary(self, write_path):
+		"""Generate data for job_salary table"""
 		df_job_salary = self.main_df.select(col("Job Title").alias("job_title"),
 											 col("Company Name").alias("company"), 
 											 col("Salary Estimate").alias("estimated_salary"))
@@ -81,6 +89,7 @@ class GlassdoorJobs(DataUtil):
 		df_job_salary.toPandas().to_csv(w_path, index=False)
 
 	def generate_job_sector(self, write_path):
+		"""Generate data for job_sector table"""
 		df_job_sector = self.main_df.select(col("Job Title").alias("job_title"), 
 											col("Sector").alias("sector"))
 		
@@ -93,33 +102,13 @@ class GlassdoorJobs(DataUtil):
 	@staticmethod
 	@udf
 	def get_est_salary(salary_range):
+		"""Remove redundant info from salary text
+		Args:
+			salary_range(str): salary information
+
+		Return: (str) with extra info removed
+
+
+		"""
 		to_repl = "(Glassdoor Est.)"
 		return salary_range.replace(to_repl, "").strip()
-
-
-# from pyspark.sql import SparkSession
-# def create_spark_session():
-#     spark = SparkSession \
-#         .builder \
-#         .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:2.7.0") \
-#         .getOrCreate()
-#     return spark
-
-
-
-# from pyspark.sql import SparkSession
-
-
-# if __name__ == "__main__":
-# 	spark = create_spark_session()
-
-# 	l = GlassdoorJobs(spark, source_path="../final_data/Data_Science_Jobs_Glassdoor/*.csv")
-# 	l.read_data_from_source()
-# 	l.generate_jobs_table("/home/rayyan/Projects/Udacity_Capstone_Project_Data_Science_Jobs/final_data/output/job_data")
-# 	l.generate_location_description("/home/rayyan/Projects/Udacity_Capstone_Project_Data_Science_Jobs/final_data/output/job_location")
-# 	l.generate_date_description_table("/home/rayyan/Projects/Udacity_Capstone_Project_Data_Science_Jobs/final_data/output/job_date_details")
-# 	l.generate_job_reviews("/home/rayyan/Projects/Udacity_Capstone_Project_Data_Science_Jobs/final_data/output/job_rating")
-# 	l.generate_job_salary("/home/rayyan/Projects/Udacity_Capstone_Project_Data_Science_Jobs/final_data/output/job_salary")
-# 	l.generate_job_sector("/home/rayyan/Projects/Udacity_Capstone_Project_Data_Science_Jobs/final_data/output/job_sector")
-
-# 	spark.stop()

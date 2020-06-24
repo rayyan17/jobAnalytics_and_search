@@ -1,3 +1,5 @@
+"""Main DAG"""
+
 from datetime import datetime, timedelta
 import os
 
