@@ -219,4 +219,8 @@ After this go to <a>http://localhost:3001/</a> and run the DAG (jobs_analysis). 
 2. **The pipelines would be run on a daily basis by 7 am every day.**:
 <br>The pipeline is set to 2 days ago date. In order to start it by 7am just switch on the DAG by 7am clock and it will keep its daily iteration by 7am daily.
 3. **The database needed to be accessed by 100+ people.**:
-<br>AWS Redshift can easily Grant access to a group of people with same rights or indvidually.
+<br>If the pipeline is get accessed by 100+ people that our 2 modules will get the major hits:
+
+1. **Amazon Redshift**, since a lot of people will be requesting OLAP queires at a time. In order to configure concurrecny scaling on Redshift we will route eligible queires to new, dedicated clusters. The total number of clusters that should be used for concurrency scaling can be set by the parameter max_concurrency_scaling_clusters.  Increasing the value of this parameter provisions additional standby clusters.
+
+2. 100+ people accessing the pipeline at once means thousands of transactions per second in request performance when uploading and retrieving storage from Amazon **S3**. Amazon S3 automatically scales to high request rates. An application can achieve 3000 to 5000 requests per second per prefix in a bucket. We can increase the number of prefixes in our bucket. One best way is to store the files in parquet format with appropriate Partition Keys.
