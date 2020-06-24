@@ -116,9 +116,11 @@ Each of these files are shift into corresponding **S3** directories
 
 2.  **Schema Goal**:
     <br> The schema is designed in a way to handle multiple job related queires like what is the most recent job, what is the salary range of a particular job_title in a company, location details for the posted job, or search jobs belongs to a particular sector
+
 <p align="center">
 <img src="readme_files/data_model.png" width="100%" height="60%">
 </p>
+
 3. **Sample Queries for BA team:**<br>
     Check Salary variations by a Company at different locations:
     ```sql
