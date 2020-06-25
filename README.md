@@ -13,16 +13,19 @@ In this pipeline we are using the following data resources:<br>
 <p align="left">
 <img src="readme_files/linkedin_data_schema.png" width="50%" height="40%">
 </p>
+
 2. **Indeed** (https://www.kaggle.com/joshmantovani/data-science-jobs)
 <br> <i>df_all_indeed.csv</i> contains the info:<br>
 <p align="left">
 <img src="readme_files/indeed_data_schema.png" width="50%" height="40%">
 </p>
+
 3. **Glassdoor** (https://www.kaggle.com/rkb0023/glassdoor-data-science-jobs)
 <br> <i>df_all_glassdoor.csv</i> contains the info:<br>
 <p align="left">
 <img src="readme_files/glassdoor_data_schema.png" width="50%" height="20%"> 
 </p>
+
 4. **StackOverflow** (https://www.kaggle.com/stackoverflow/stack-overflow-2018-developer-survey)
 <br> <i>
 survey_results_public.csv</i> contains information about developers on StackOverflow. It has 129 columns with various useful info like his hobbies, skillset, education, employment etc.<br>
