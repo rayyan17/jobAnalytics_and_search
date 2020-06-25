@@ -1,0 +1,21 @@
+person_id,hobby,open_source_contrib,country,student,employment,main_education,development_area,latest_job,productive_hours,gender,age
+1,Yes,No,Kenya,No,Employed part-time,"Bachelor’s degree (BA, BS, B.Eng., etc.)",Full-stack developer,Less than a year ago,One to three months,Male,25 - 34 years old
+3,Yes,Yes,United Kingdom,No,Employed full-time,"Bachelor’s degree (BA, BS, B.Eng., etc.)",Database administrator;DevOps specialist;Full-stack developer;System administrator,More than 4 years ago,One to three months,Male,35 - 44 years old
+4,Yes,Yes,United States,No,Employed full-time,Associate degree,Engineering manager;Full-stack developer,Less than a year ago,,,
+5,No,No,United States,No,Employed full-time,"Bachelor’s degree (BA, BS, B.Eng., etc.)",Full-stack developer,Less than a year ago,Three to six months,Male,35 - 44 years old
+7,Yes,No,South Africa,"Yes, part-time",Employed full-time,Some college/university study without earning a degree,Data or business analyst;Desktop or enterprise applications developer;Game or graphics developer;QA or test developer;Student,Between 1 and 2 years ago,Three to six months,Male,18 - 24 years old
+8,Yes,No,United Kingdom,No,Employed full-time,"Bachelor’s degree (BA, BS, B.Eng., etc.)",Back-end developer;Database administrator;Front-end developer;Full-stack developer,Between 2 and 4 years ago,Less than a month,Male,18 - 24 years old
+9,Yes,Yes,United States,No,Employed full-time,Some college/university study without earning a degree,Back-end developer;Front-end developer;Full-stack developer,Less than a year ago,Six to nine months,Male,18 - 24 years old
+10,Yes,Yes,Nigeria,No,Employed full-time,"Bachelor’s degree (BA, BS, B.Eng., etc.)",Designer;Front-end developer;QA or test developer,Less than a year ago,One to three months,Female,25 - 34 years old
+11,Yes,Yes,United States,No,Employed full-time,Some college/university study without earning a degree,"Back-end developer;C-suite executive (CEO, CTO, etc.);Data or business analyst;Database administrator;DevOps specialist;Engineering manager;Full-stack developer;System administrator",Between 2 and 4 years ago,Three to six months,Male,35 - 44 years old
+16,No,Yes,India,No,Employed full-time,"Bachelor’s degree (BA, BS, B.Eng., etc.)",Designer,,,,
+17,Yes,No,Spain,No,Employed full-time,"Master’s degree (MA, MS, M.Eng., MBA, etc.)",Back-end developer;Database administrator;Mobile developer;System administrator,,,,
+18,Yes,Yes,India,No,Employed full-time,"Bachelor’s degree (BA, BS, B.Eng., etc.)",Back-end developer;Front-end developer;Full-stack developer,,,,
+19,Yes,No,Croatia,,Employed full-time,Some college/university study without earning a degree,Back-end developer;Front-end developer,,,,
+20,No,No,India,No,Employed full-time,"Bachelor’s degree (BA, BS, B.Eng., etc.)",Back-end developer;Full-stack developer,Less than a year ago,,,
+21,No,No,Netherlands,"Yes, full-time",Employed full-time,"Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)",Back-end developer;Front-end developer;Student,Between 2 and 4 years ago,Less than a month,Male,18 - 24 years old
+22,Yes,No,Israel,No,Employed full-time,"Master’s degree (MA, MS, M.Eng., MBA, etc.)",Full-stack developer,Between 2 and 4 years ago,,,
+26,No,No,United States,"Yes, full-time",Employed part-time,"Bachelor’s degree (BA, BS, B.Eng., etc.)",Student,Less than a year ago,,,
+27,Yes,No,Sweden,No,Employed full-time,"Master’s degree (MA, MS, M.Eng., MBA, etc.)",Back-end developer,Between 1 and 2 years ago,Three to six months,Male,35 - 44 years old
+29,Yes,Yes,India,"Yes, full-time",Employed full-time,"Bachelor’s degree (BA, BS, B.Eng., etc.)",Data or business analyst;Data scientist or machine learning specialist;Database administrator;DevOps specialist,Between 1 and 2 years ago,,Female,
+31,Yes,Yes,Chile,"Yes, full-time",Employed part-time,"Bachelor’s degree (BA, BS, B.Eng., etc.)",Back-end developer;Front-end developer;Full-stack developer;QA or test developer;Student,,,,

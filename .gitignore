@@ -16,4 +16,6 @@ data_pipeline/airflow/
 
 
 !requirements.txt
+!sample_data/*/*.csv
+!sample_data/*/*/*.csv
 
