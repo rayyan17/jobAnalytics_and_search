@@ -105,6 +105,7 @@ Each of these 4 transformer extracts useful information from **S3** bucket and g
 <p align="center">
 <img src="readme_files/developer_tables.png" width="100%" height="60%">
 </p>
+
 Each of these files are shift into corresponding **S3** directories
 
 <br>
