@@ -65,7 +65,7 @@ py4j==0.10.9
 Pygments==2.6.1
 PyJWT==1.7.1
 pyrsistent==0.16.0
-pyspark==3.0.0
+pyspark==3.2.2
 python-daemon==2.1.2
 python-dateutil==2.8.1
 python-editor==1.0.4
